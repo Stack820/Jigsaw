@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "BlackSkin,BlackSkin@atlas0_png,common@atlas0_png,common,debug,protoCfg_map",
+			"keys": "BlackSkin,BlackSkin@atlas0_png,common@atlas0_png,common,debug,protoCfg_map,jigsaw_json",
 			"name": "preload"
 		},
 		{
@@ -375,6 +375,11 @@
 			"url": "cfg/configCfg.map",
 			"type": "bin",
 			"name": "configCfg_map"
+		},
+		{
+			"url": "cfg/jigsaw.json",
+			"type": "json",
+			"name": "jigsaw_json"
 		}
 	]
 }

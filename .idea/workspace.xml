@@ -17,7 +17,7 @@
       <file leaf-file-name="Main.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
+            <state relative-caret-position="374">
               <caret line="189" column="13" lean-forward="false" selection-start-line="189" selection-start-column="13" selection-end-line="189" selection-end-column="13" />
               <folding />
             </state>
@@ -27,8 +27,18 @@
       <file leaf-file-name="GameLogin.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameLogin.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="70" column="45" lean-forward="false" selection-start-line="70" selection-start-column="45" selection-end-line="70" selection-end-column="45" />
+            <state relative-caret-position="414">
+              <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="assetsmanager.d.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/libs/modules/assetsmanager/assetsmanager.d.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="404">
+              <caret line="894" column="38" lean-forward="false" selection-start-line="894" selection-start-column="38" selection-end-line="894" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -54,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default.res.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="default.res.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resource/default.res.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="276" column="26" lean-forward="true" selection-start-line="276" selection-start-column="26" selection-end-line="276" selection-end-column="26" />
+            <state relative-caret-position="418">
+              <caret line="381" column="32" lean-forward="false" selection-start-line="381" selection-start-column="21" selection-end-line="381" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -68,17 +78,7 @@
         <entry file="file://$PROJECT_DIR$/src/fairui/manager/FairyUIManager.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
-              <caret line="36" column="48" lean-forward="true" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PanelRegister.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/fairui/PanelRegister.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <caret line="36" column="48" lean-forward="false" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -94,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameClient.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameClient.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameClient.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-216">
-              <caret line="16" column="11" lean-forward="false" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+            <state relative-caret-position="252">
+              <caret line="33" column="40" lean-forward="true" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -171,7 +171,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/center/activity/ActivityCenter.ts" />
         <option value="$PROJECT_DIR$/src/com/center/fight/FightCenter.ts" />
         <option value="$PROJECT_DIR$/src/net/connect/accpet/FightCommandRegister.ts" />
         <option value="$PROJECT_DIR$/src/com/center/fight/script/ScriptCenter.ts" />
@@ -202,7 +201,6 @@
         <option value="$PROJECT_DIR$/src/fairui/views/component/BaseItem.ts" />
         <option value="$PROJECT_DIR$/src/fairui/views/component/BaseSprite.ts" />
         <option value="$PROJECT_DIR$/src/fairui/views/component/EImage.ts" />
-        <option value="$PROJECT_DIR$/src/fairui/views/main/MenuPanel.ts" />
         <option value="$PROJECT_DIR$/src/view/login/LoginLoadingView.ts" />
         <option value="$PROJECT_DIR$/src/App.ts" />
         <option value="$PROJECT_DIR$/src/fairui/PanelRegister.ts" />
@@ -222,6 +220,8 @@
         <option value="$PROJECT_DIR$/src/GameClient.ts" />
         <option value="$PROJECT_DIR$/src/Main.ts" />
         <option value="$PROJECT_DIR$/src/GameLogin.ts" />
+        <option value="$PROJECT_DIR$/resource/default.res.json" />
+        <option value="$PROJECT_DIR$/src/fairui/views/main/MenuPanel.ts" />
       </list>
     </option>
   </component>
@@ -296,11 +296,6 @@
             <path>
               <item name="Jigsaw" type="b2602c69:ProjectViewProjectNode" />
               <item name="Jigsaw" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Jigsaw" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Jigsaw" type="462c0819:PsiDirectoryNode" />
-              <item name="resource" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -595,7 +590,7 @@
       <workItem from="1536024492616" duration="9101000" />
       <workItem from="1536113447289" duration="763000" />
       <workItem from="1536114398097" duration="8238000" />
-      <workItem from="1536128410819" duration="5407000" />
+      <workItem from="1536128410819" duration="8187000" />
     </task>
     <task id="LOCAL-00001" summary="GM面板">
       <created>1524897446143</created>
@@ -825,7 +820,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1576026000" />
+    <option name="totallyTimeSpent" value="1578806000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -934,16 +929,16 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/Main.ts</url>
-          <line>189</line>
+          <url>file://$PROJECT_DIR$/src/fairui/views/main/MenuPanel.ts</url>
+          <line>10</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1257" />
+          <option name="timeStamp" value="1259" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="1259" />
+      <option name="time" value="1260" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JavascriptDebugType">
@@ -1052,14 +1047,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libs/modules/assetsmanager/assetsmanager.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="340" column="73" lean-forward="true" selection-start-line="340" selection-start-column="73" selection-end-line="340" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/as3/Dictionary.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -1112,14 +1099,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/base/GImage.ts" />
-    <entry file="file://$PROJECT_DIR$/src/fairui/views/main/MenuPanel.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/fairui/views/component/EImage.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-337">
@@ -1287,30 +1266,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameClient.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-216">
-          <caret line="16" column="11" lean-forward="false" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogin.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="70" column="45" lean-forward="false" selection-start-line="70" selection-start-column="45" selection-end-line="70" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="189" column="13" lean-forward="false" selection-start-line="189" selection-start-column="13" selection-end-line="189" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/fairui/views/component/ELoader.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="882">
@@ -1322,15 +1277,55 @@
     <entry file="file://$PROJECT_DIR$/src/fairui/manager/FairyUIManager.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="36" column="48" lean-forward="true" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
+          <caret line="36" column="48" lean-forward="false" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogin.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/modules/assetsmanager/assetsmanager.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="894" column="38" lean-forward="false" selection-start-line="894" selection-start-column="38" selection-end-line="894" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resource/default.res.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="276" column="26" lean-forward="true" selection-start-line="276" selection-start-column="26" selection-end-line="276" selection-end-column="26" />
+        <state relative-caret-position="418">
+          <caret line="381" column="32" lean-forward="false" selection-start-line="381" selection-start-column="21" selection-end-line="381" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="189" column="13" lean-forward="false" selection-start-line="189" selection-start-column="13" selection-end-line="189" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fairui/views/main/MenuPanel.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="56" lean-forward="false" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameClient.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="33" column="40" lean-forward="true" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
           <folding />
         </state>
       </provider>

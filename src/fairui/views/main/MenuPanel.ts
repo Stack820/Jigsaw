@@ -5,5 +5,11 @@ module fairui {
         }
 
 
+        public show(data: any): void {
+            super.show(data);
+
+            let jsonObj:any = RES.getRes("jigsaw_json");
+
+        }
     }
 }
