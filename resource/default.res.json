@@ -1,140 +1,380 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json",
+			"keys": "BlackSkin,BlackSkin@atlas0_png,common@atlas0_png,common,debug,protoCfg_map",
 			"name": "preload"
+		},
+		{
+			"keys": "main,main@atlas0_png,configCfg_map",
+			"name": "main"
+		},
+		{
+			"keys": "font1_fnt,font1_png,font2_fnt,font2_png,font5_fnt,font5_png,fight_ui_json,font9_png,font9_fnt,fight,fight@atlas0_png",
+			"name": "fight"
+		},
+		{
+			"keys": "login,login@atlas0_png",
+			"name": "login"
+		},
+		{
+			"keys": "tip",
+			"name": "tip"
+		},
+		{
+			"keys": "check@atlas0_png,check",
+			"name": "check"
+		},
+		{
+			"keys": "heroes@atlas0_png,heroes",
+			"name": "heroes"
+		},
+		{
+			"keys": "friend@atlas0_png,friend",
+			"name": "friend"
+		},
+		{
+			"keys": "food@atlas0_png,food",
+			"name": "food"
+		},
+		{
+			"keys": "activity@atlas0_png,activity",
+			"name": "activity"
+		},
+		{
+			"keys": "shouhun@atlas0_png,shouhun",
+			"name": "shouhun"
+		},
+		{
+			"keys": "task@atlas0_png,task",
+			"name": "task"
+		},
+		{
+			"keys": "mail@atlas0_png,mail",
+			"name": "mail"
+		},
+		{
+			"keys": "show@atlas0_png,show",
+			"name": "show"
+		},
+		{
+			"keys": "home@atlas0_png,home",
+			"name": "home"
+		},
+		{
+			"keys": "pet@atlas0_png,pet",
+			"name": "pet"
+		},
+		{
+			"keys": "worldboss@atlas0_png,worldboss",
+			"name": "worldboss"
+		},
+		{
+			"keys": "farm@atlas0_png,farm",
+			"name": "farm"
+		},
+		{
+			"keys": "recharge@atlas0_png,recharge",
+			"name": "recharge"
+		},
+		{
+			"keys": "histeam@atlas0_png,histeam",
+			"name": "histeam"
+		},
+		{
+			"keys": "arena@atlas0_png,arena",
+			"name": "arena"
+		},
+		{
+			"keys": "techs@atlas0_png,techs",
+			"name": "techs"
 		}
 	],
 	"resources": [
 		{
-			"url": "assets/CheckBox/checkbox_select_disabled.png",
-			"type": "image",
-			"name": "checkbox_select_disabled_png"
+			"url": "pro/font/font1.fnt",
+			"type": "font",
+			"name": "font1_fnt"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_select_down.png",
+			"url": "pro/font/font1.png",
 			"type": "image",
-			"name": "checkbox_select_down_png"
+			"name": "font1_png"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_select_up.png",
-			"type": "image",
-			"name": "checkbox_select_up_png"
+			"url": "pro/font/font2.fnt",
+			"type": "font",
+			"name": "font2_fnt"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_unselect.png",
+			"url": "pro/font/font2.png",
 			"type": "image",
-			"name": "checkbox_unselect_png"
+			"name": "font2_png"
 		},
 		{
-			"url": "assets/ItemRenderer/selected.png",
-			"type": "image",
-			"name": "selected_png"
+			"url": "pro/font/font5.fnt",
+			"type": "font",
+			"name": "font5_fnt"
 		},
 		{
-			"url": "assets/Panel/border.png",
+			"url": "pro/font/font5.png",
 			"type": "image",
-			"name": "border_png"
+			"name": "font5_png"
 		},
 		{
-			"url": "assets/Panel/header.png",
-			"type": "image",
-			"name": "header_png"
+			"url": "pro/fight/fight_ui.json",
+			"type": "sheet",
+			"name": "fight_ui_json",
+			"subkeys": "baoji_png,heiying2_png,heiying_png,rolebar_back_jpg,rolebar_bg_cu_png,rolebar_bg_xi_png,rolebar_boss_png,rolebar_df_cu_png,rolebar_lv_cu_png,rolebar_lv_xi_png,rolebar_xiaoguai_png,rolebar_zl_yellow_xi_png,shanbi_png,skill_name_back_png,yingzi_png"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_select_disabled.png",
-			"type": "image",
-			"name": "radiobutton_select_disabled_png"
+			"url": "pro/font/font9.fnt",
+			"type": "font",
+			"name": "font9_fnt"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_select_down.png",
+			"url": "pro/font/font9.png",
 			"type": "image",
-			"name": "radiobutton_select_down_png"
+			"name": "font9_png"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_select_up.png",
-			"type": "image",
-			"name": "radiobutton_select_up_png"
+			"url": "pro/fairui/BlackSkin.map",
+			"type": "bin",
+			"name": "BlackSkin"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_unselect.png",
+			"url": "pro/fairui/BlackSkin@atlas0.png",
 			"type": "image",
-			"name": "radiobutton_unselect_png"
+			"name": "BlackSkin@atlas0_png"
 		},
 		{
-			"url": "assets/ScrollBar/roundthumb.png",
-			"type": "image",
-			"name": "roundthumb_png"
+			"url": "pro/fairui/activity.map",
+			"type": "bin",
+			"name": "activity"
 		},
 		{
-			"url": "assets/Slider/thumb.png",
+			"url": "pro/fairui/activity@atlas0.png",
 			"type": "image",
-			"name": "thumb_png"
+			"name": "activity@atlas0_png"
 		},
 		{
-			"url": "assets/Slider/track.png",
-			"type": "image",
-			"name": "track_png"
+			"url": "pro/fairui/arena.map",
+			"type": "bin",
+			"name": "arena"
 		},
 		{
-			"url": "assets/Slider/tracklight.png",
+			"url": "pro/fairui/arena@atlas0.png",
 			"type": "image",
-			"name": "tracklight_png"
+			"name": "arena@atlas0_png"
 		},
 		{
-			"url": "assets/ToggleSwitch/handle.png",
-			"type": "image",
-			"name": "handle_png"
+			"url": "pro/fairui/check.map",
+			"type": "bin",
+			"name": "check"
 		},
 		{
-			"url": "assets/ToggleSwitch/off.png",
+			"url": "pro/fairui/check@atlas0.png",
 			"type": "image",
-			"name": "off_png"
+			"name": "check@atlas0_png"
 		},
 		{
-			"url": "assets/ToggleSwitch/on.png",
-			"type": "image",
-			"name": "on_png"
+			"url": "pro/fairui/common.map",
+			"type": "bin",
+			"name": "common"
 		},
 		{
-			"url": "assets/Button/button_down.png",
+			"url": "pro/fairui/common@atlas0.png",
 			"type": "image",
-			"name": "button_down_png"
+			"name": "common@atlas0_png"
 		},
 		{
-			"url": "assets/Button/button_up.png",
-			"type": "image",
-			"name": "button_up_png"
+			"url": "pro/fairui/debug.map",
+			"type": "bin",
+			"name": "debug"
 		},
 		{
-			"url": "assets/ProgressBar/thumb_pb.png",
-			"type": "image",
-			"name": "thumb_pb_png"
+			"url": "pro/fairui/farm.map",
+			"type": "bin",
+			"name": "farm"
 		},
 		{
-			"url": "assets/ProgressBar/track_pb.png",
+			"url": "pro/fairui/farm@atlas0.png",
 			"type": "image",
-			"name": "track_pb_png"
+			"name": "farm@atlas0_png"
 		},
 		{
-			"url": "assets/ScrollBar/track_sb.png",
-			"type": "image",
-			"name": "track_sb_png"
+			"url": "pro/fairui/fight.map",
+			"type": "bin",
+			"name": "fight"
 		},
 		{
-			"url": "assets/bg.jpg",
+			"url": "pro/fairui/fight@atlas0.png",
 			"type": "image",
-			"name": "bg_jpg"
+			"name": "fight@atlas0_png"
 		},
 		{
-			"url": "assets/egret_icon.png",
-			"type": "image",
-			"name": "egret_icon_png"
+			"url": "pro/fairui/food.map",
+			"type": "bin",
+			"name": "food"
 		},
 		{
-			"name": "description_json",
-			"type": "json",
-			"url": "config/description.json"
+			"url": "pro/fairui/food@atlas0.png",
+			"type": "image",
+			"name": "food@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/friend.map",
+			"type": "bin",
+			"name": "friend"
+		},
+		{
+			"url": "pro/fairui/friend@atlas0.png",
+			"type": "image",
+			"name": "friend@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/heroes.map",
+			"type": "bin",
+			"name": "heroes"
+		},
+		{
+			"url": "pro/fairui/heroes@atlas0.png",
+			"type": "image",
+			"name": "heroes@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/histeam.map",
+			"type": "bin",
+			"name": "histeam"
+		},
+		{
+			"url": "pro/fairui/histeam@atlas0.png",
+			"type": "image",
+			"name": "histeam@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/home.map",
+			"type": "bin",
+			"name": "home"
+		},
+		{
+			"url": "pro/fairui/home@atlas0.png",
+			"type": "image",
+			"name": "home@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/login.map",
+			"type": "bin",
+			"name": "login"
+		},
+		{
+			"url": "pro/fairui/login@atlas0.png",
+			"type": "image",
+			"name": "login@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/mail.map",
+			"type": "bin",
+			"name": "mail"
+		},
+		{
+			"url": "pro/fairui/mail@atlas0.png",
+			"type": "image",
+			"name": "mail@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/main.map",
+			"type": "bin",
+			"name": "main"
+		},
+		{
+			"url": "pro/fairui/main@atlas0.png",
+			"type": "image",
+			"name": "main@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/pet.map",
+			"type": "bin",
+			"name": "pet"
+		},
+		{
+			"url": "pro/fairui/pet@atlas0.png",
+			"type": "image",
+			"name": "pet@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/recharge.map",
+			"type": "bin",
+			"name": "recharge"
+		},
+		{
+			"url": "pro/fairui/recharge@atlas0.png",
+			"type": "image",
+			"name": "recharge@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/shouhun.map",
+			"type": "bin",
+			"name": "shouhun"
+		},
+		{
+			"url": "pro/fairui/shouhun@atlas0.png",
+			"type": "image",
+			"name": "shouhun@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/techs.map",
+			"type": "bin",
+			"name": "techs"
+		},
+		{
+			"url": "pro/fairui/techs@atlas0.png",
+			"type": "image",
+			"name": "techs@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/tip.map",
+			"type": "bin",
+			"name": "tip"
+		},
+		{
+			"url": "pro/fairui/worldboss.map",
+			"type": "bin",
+			"name": "worldboss"
+		},
+		{
+			"url": "pro/fairui/worldboss@atlas0.png",
+			"type": "image",
+			"name": "worldboss@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/task.map",
+			"type": "bin",
+			"name": "task"
+		},
+		{
+			"url": "pro/fairui/task@atlas0.png",
+			"type": "image",
+			"name": "task@atlas0_png"
+		},
+		{
+			"url": "pro/fairui/show.map",
+			"type": "bin",
+			"name": "show"
+		},
+		{
+			"url": "pro/fairui/show@atlas0.png",
+			"type": "image",
+			"name": "show@atlas0_png"
+		},
+		{
+			"url": "cfg/protoCfg.map",
+			"type": "bin",
+			"name": "protoCfg_map"
+		},
+		{
+			"url": "cfg/configCfg.map",
+			"type": "bin",
+			"name": "configCfg_map"
 		}
 	]
 }

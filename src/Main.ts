@@ -26,75 +26,181 @@
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 //////////////////////////////////////////////////////////////////////////////////////
+import DisplayObject = egret.DisplayObject;
+import LoginEvent = com.events.LoginEvent;
+import EventType = com.events.EventType;
 
-class Main extends eui.UILayer {
+class Main extends egret.DisplayObjectContainer {
+    /**加载进度界面*/
+    private loadingView: view.LoginLoadingView;
+    public mainView: base.GSprite;
+    public fairyUIView: base.GSprite;
 
+    public constructor() {
+        super();
 
-    protected createChildren(): void {
-        super.createChildren();
+        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
+    }
 
-        egret.lifecycle.addLifecycleListener((context) => {
-            // custom lifecycle plugin
-        })
-
+    private onAddToStage(event: egret.Event) {
+        this.stage.addEventListener(egret.Event.RESIZE, this.resizeHandler, this);
+        //this.stage.addEventListener(egret.Event.DEACTIVATE, this.deactivateHandler, this);
+        //this.stage.addEventListener(egret.Event.ACTIVATE, this.activateHandler, this);
+        // egret.lifecycle.addLifecycleListener((context) => {
+        //     // custom lifecycle plugin
+        //     context.onUpdate = () => {
+        //     }
+        // })
         egret.lifecycle.onPause = () => {
-            egret.ticker.pause();
+            // switch (egret.Capabilities.os) {
+            //     case "iOS":// 苹果手机操作系统 “iOS”
+            //     case "Android"://  安卓手机操作系统 “Android”
+            //     case "Windows Phone"://  微软手机操作系统 “Windows Phone”
+            //     case "Unknown":
+            //         egret.ticker.pause();
+            //         break;
+            // }
+            //egret.ticker.pause();
+            this.deactivateHandler();
         }
-
         egret.lifecycle.onResume = () => {
+            // switch (egret.Capabilities.os) {
+            //     case "iOS":// 苹果手机操作系统 “iOS”
+            //     case "Android"://  安卓手机操作系统 “Android”
+            //     case "Windows Phone"://  微软手机操作系统 “Windows Phone”
+            //     case "Unknown":
+            //         egret.ticker.resume();
+            //         break;
+            // }
             egret.ticker.resume();
+            this.activateHandler();
         }
-
-        //inject the custom material parser
-        //注入自定义的素材解析器
-        let assetAdapter = new AssetAdapter();
-        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
-        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
-
-
         this.runGame().catch(e => {
             console.log(e);
         })
+        //WebParams.setErrorLog(App.lang.getLang("lang_client_760"), "Windex.error:\n");
+    }
+
+    private resizeHandler() {
+        EventManager.dispatchEvent(EventType.STGAE_RESIZE);
+    }
+
+    private deactivateHandler() {
+        Config.isActivate = false;
+        EventManager.dispatchEvent(EventType.DEACTIVATE);
+        //Config.gotoHeartBeat();
+    }
+
+    private activateHandler() {
+        //Config.isActivate = true;
+        EventManager.dispatchEvent(EventType.ACTIVATE);
+        //Config.clearHeartBeat();
     }
 
     private async runGame() {
-        await this.loadResource();
-        this.createGameScene();
-
+        await this.loadResource()
+        //const result = await RES.getResAsync("description_json");
+        //await platform.login();
+        //const userInfo = await platform.getUserInfo();
     }
 
     private async loadResource() {
         try {
-            const loadingView = new LoadingUI();
-            this.stage.addChild(loadingView);
-            await RES.loadConfig("resource/default.res.json", "resource/");
-            await this.loadTheme();
-            await RES.loadGroup("preload", 0, loadingView);
-            this.stage.removeChild(loadingView);
+            App.init(this);
+            let default_res_json: string = "";
+            default_res_json = "resource/default.res.json";
+            RES.setMaxLoadingThread(8);
+            await RES.loadConfig(default_res_json, "resource/");
+            this.loadingView = new view.LoginLoadingView();
+            this.addChild(this.loadingView);
+
+            if (window['closeLoadingView']) {
+                window['closeLoadingView']();
+            }
+
+            this.loadingView.onProgress(5, 100, "Loadding nationalized language txt[" + Config.releaseVersion + "].");
+            RES.getResByUrl("locale/" + Config.locale + "/language.json?v=" + Config.releaseVersion, function loadJson(json: Object) {
+                fairui.LoaderManager.disposeRes("locale/" + Config.locale + "/language.json?v=" + Config.releaseVersion);
+                this.loadGroup();
+            }, this, RES.ResourceItem.TYPE_JSON);
         }
         catch (e) {
             console.error(e);
         }
     }
 
-    private loadTheme() {
-        return new Promise((resolve, reject) => {
-            // load skin theme configuration file, you can manually modify the file. And replace the default skin.
-            //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
-            let theme = new eui.Theme("resource/default.thm.json", this.stage);
-            theme.addEventListener(eui.UIEvent.COMPLETE, () => {
-                resolve();
-            }, this);
-
-        })
+    private async loadGroup() {
+        this.loadingView.onProgress(10, 100, "Loadding preload res.");
+        await RES.loadGroup("preload", 0);
+        this.loadingView.onProgress(20, 100, "Loadding version parser[" + Config.releaseVersion + "].");
+        this.createGameScene();
     }
-
-    private textfield: egret.TextField;
+    /**
+     * 创建游戏场景
+     * Create a game scene
+     */
+    private createGameScene() {
+        this.loadingView.onProgress(30, 100, "The game scene is being created...");
+        //this.hideGameLoadding();
+        //this.removeChild(this.loadingView);
+        this.startCreateScene();
+    }
     /**
      * 创建场景界面
      * Create scene interface
      */
-    protected createGameScene(): void {
-        //TODO 进入游戏
+    protected startCreateScene(): void {
+        this.fairyUIView = new base.GSprite();
+        this.mainView = new GameLogin();
+        this.addChildAt(this.mainView, 0);
+        this.addChildAt(this.fairyUIView, 1);
+        //EventManager.addEventListener(com.events.LoginEvent.SHOW_INIT_GAME_PROGRESS, this.showLoadingUI, this);
+        EventManager.addEventListener(LoginEvent.ROLE_LOGIN_TO_SECNE, this.onRoleToScene, this);
+        EventManager.addEventListener(LoginEvent.SHOW_GAME_LOADDING, this.showGameLoadding, this);
+        EventManager.addEventListener(LoginEvent.HIDE_GAME_LOADDING, this.hideGameLoadding, this);
+    }
+    /**显示加载进度界面*/
+    private showGameLoadding() {
+        if (this.loadingView && !this.contains(this.loadingView))
+            this.addChild(this.loadingView);
+        this.loadingView.show();
+    }
+    /**隐藏加载进度界面*/
+    private hideGameLoadding() {
+        if (this.loadingView && this.contains(this.loadingView))
+            this.removeChild(this.loadingView);
+        this.loadingView.hide();
+    }
+
+    private onRoleToScene() {
+        //EventManager.removeEventListener(com.events.LoginEvent.SHOW_INIT_GAME_PROGRESS, this.showLoadingUI, this);
+        EventManager.removeEventListener(LoginEvent.ROLE_LOGIN_TO_SECNE, this.onRoleToScene, this);
+        EventManager.removeEventListener(LoginEvent.SHOW_GAME_LOADDING, this.showGameLoadding, this);
+        EventManager.removeEventListener(LoginEvent.HIDE_GAME_LOADDING, this.hideGameLoadding, this);
+        this.deleteLoadingUI();
+    }
+
+    private deleteLoadingUI() {
+        this.hideGameLoadding();
+        this.loadingView.dispose();
+        this.loadingView = null;
+    }
+
+    public createGameClient() {
+        this.loadingView.onProgress(96, 100, "Entering the game...");
+        if (this.mainView) {
+            this.mainView.dispose();
+            this.removeChild(this.mainView);
+        }
+        this.mainView = new GameClient();
+        this.addChildAt(this.mainView, 0);
+    }
+
+    public changeScene(type: number, displayObject: base.GSprite) {
+        (<GameClient>this.mainView).changeScene(type, displayObject);
+    }
+
+    public removeScene(displayObject: base.GSprite) {
+        (<GameClient>this.mainView).removeScene(displayObject);
     }
 }

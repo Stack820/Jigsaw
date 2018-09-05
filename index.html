@@ -3,47 +3,94 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Egret</title>
+    <title>拼图游戏</title>
     <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="full-screen" content="true" />
     <meta name="screen-orientation" content="portrait" />
     <meta name="x5-fullscreen" content="true" />
     <meta name="360-fullscreen" content="true" />
+    <!-- <script type="text/javascript" src="https://aihelp.net/elva/elvah5/elvactrl.js" async="async"></script> -->
+    <!-- <script type="text/javascript" src="https://aihelp.net/static/js/elvactrl.js" async="async"></script> -->
     <style>
         html, body {
             -ms-touch-action: none;
-            background: #888888;
+            background: #000000;
             padding: 0;
             border: 0;
             margin: 0;
             height: 100%;
         }
+        #preloading {
+            z-index: 1000;
+            position: absolute;
+            background-image: url("loadding/preloading.gif");
+            background-repeat: no-repeat;
+            width: 128px;
+            height: 146px;
+            margin-left:-64px;
+            left:50%;
+            transform: translateX(-50%);
+            top: 50%;
+            transform: translateY(-50%);
+            /*z-index: 1000;
+            position: absolute;
+            text-align: center;
+            top: 20%;
+            left: 35%;
+            width: 300px;
+            height: 300px;*/
+        }
+        #info{
+            width: 800px;
+            text-align: center;
+            color: #ffffff;
+            size: 2;
+            bottom: 0;
+            margin-left: -350px;
+            margin-top: 160px;
+        }
     </style>
 </head>
 
 <body>
-    <div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
-         data-entry-class="Main"
-         data-orientation="landscape"
-         data-scale-mode="showAll"
-         data-frame-rate="30"
-         data-content-width="1136"
-         data-content-height="640"
-         data-multi-fingered="2"
-         data-show-fps="false" data-show-log="false"
-         data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
+    <div id="preloading">
+        <h3 id="info">
     </div>
+    <div style="margin: auto;width: 100%;height: 100%;" class="egret-player" data-entry-class="Main" data-orientation="landscape " data-scale-mode="fixedHeight" data-frame-rate="30"
+data-content-width="1136" data-content-height="640" data-multi-fingered="2" data-show-fps="true" data-show-log="false" data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
+</div>
+
 <script>
-    var loadScript = function (list, callback) {
-        var loaded = 0;
-        var loadNext = function () {
+
+    /**更新进度条信息*/
+    let updateLoginBarInfo=function(msg)
+    {
+        if(window['ExternalInterface'] && window['ExternalInterface']['call'])
+        {
+            window['ExternalInterface']['call']("updateLoginBar", msg);
+        }
+    }
+
+    /**加载脚本列表*/
+    let loadScript = function (list, callback) 
+    {
+        let loaded = 0;
+        let loadNext = function () {
             loadSingleScript(list[loaded], function () {
+                let divObject = document.getElementById("info");
                 loaded++;
+				let loadHtml='';
                 if (loaded >= list.length) {
+					loadHtml="The game is initializing...";
+                    divObject.innerText =loadHtml;//list[loaded];
+					updateLoginBarInfo(loadHtml);
                     callback();
                 }
                 else {
+					loadHtml="Loading game files ("+list[loaded-1]+")[" + (list.length - (list.length - loaded)) + " / " + list.length + "].";
+                    divObject.innerText = loadHtml;//list[loaded];
+					updateLoginBarInfo(loadHtml);
                     loadNext();
                 }
             })
@@ -51,8 +98,9 @@
         loadNext();
     };
 
-    var loadSingleScript = function (src, callback) {
-        var s = document.createElement('script');
+    /**加载单个脚本*/
+    let loadSingleScript = function (src, callback) {
+        let s = document.createElement('script');
         s.async = false;
         s.src = src;
         s.addEventListener('load', function () {
@@ -63,32 +111,85 @@
         document.body.appendChild(s);
     };
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', './manifest.json?v=' + Math.random(), true);
-    xhr.addEventListener("load", function () {
-        var manifest = JSON.parse(xhr.response);
-        var list = manifest.initial.concat(manifest.game);
-        loadScript(list, function () {
-            /**
-             * {
-             * "renderMode":, //Engine rendering mode, "canvas" or "webgl"
-             * "audioType": 0 //Use the audio type, 0: default, 2: web audio, 3: audio
-             * "antialias": //Whether the anti-aliasing is enabled in WebGL mode, true: on, false: off, defaults to false
-             * "calculateCanvasScaleFactor": //a function return canvas scale factor
-             * }
-             **/
-            egret.runEgret({ renderMode: "webgl", audioType: 0, calculateCanvasScaleFactor:function(context) {
-                var backingStore = context.backingStorePixelRatio ||
-                    context.webkitBackingStorePixelRatio ||
-                    context.mozBackingStorePixelRatio ||
-                    context.msBackingStorePixelRatio ||
-                    context.oBackingStorePixelRatio ||
-                    context.backingStorePixelRatio || 1;
-                return (window.devicePixelRatio || 1) / backingStore;
-            }});
+    /**游戏启动入口*/
+    window.start_kdl_h5_game=function(msg)
+    {
+        let xhr = new XMLHttpRequest();
+        /*let flashvars={"account":"h5ss_test1","ad":"3","agent":"kdl","channel":"","client":"0","fcm":"0","from_ad":"",
+        "h5json":"16","h5res":"16","isadult":"1","kdlReloadGame":"0.2","lingpai":"0","pt_vip":"0","resver":"16",
+        "showlogin":"0","sid":"1","sign":"3687cc85703c2a4550ddb6d57938e980","time":"1529045533000","webid":"6"};*/
+        xhr.open('GET', './manifest.json?v=' + Math.random(), true);
+        xhr.addEventListener("load", function () {
+            let manifest = JSON.parse(xhr.response);
+            let list = manifest.initial.concat(manifest.game);
+            loadScript(list, function () {
+                /**
+                 * {
+                 * "renderMode":, //Engine rendering mode, "canvas" or "webgl"
+                 * "audioType": 0 //Use the audio type, 0: default, 2: web audio, 3: audio
+                 * "antialias": //Whether the anti-aliasing is enabled in WebGL mode, true: on, false: off, defaults to false
+                 * "calculateCanvasScaleFactor": //a function return canvas scale factor
+                 * }
+                 **/
+                if(msg)
+                {
+                    // login.WebParams.param=JSON.parse(msg);
+                }
+                updateLoginBarInfo("Run Egret Engine...");
+                egret.runEgret({
+                    renderMode: "webgl", audioType: 0, calculateCanvasScaleFactor: function (context) {
+                        let backingStore = context.backingStorePixelRatio ||
+                            context.webkitBackingStorePixelRatio ||
+                            context.mozBackingStorePixelRatio ||
+                            context.msBackingStorePixelRatio ||
+                            context.oBackingStorePixelRatio ||
+                            context.backingStorePixelRatio || 1;
+                        return (window.devicePixelRatio || 1) / backingStore;
+                    }
+                });
+            });
         });
-    });
-    xhr.send(null);
+        xhr.send(null);
+    }
+
+    /**获取URL参数*/
+    function getUrlOption(key) 
+    {
+        if (window.location) 
+        {
+            let search = location.search;
+            if (search == "") 
+            {
+                return "";
+            }
+            search = search.slice(1);
+            let searchArr = search.split("&");
+            let length_1 = searchArr.length;
+            for (let i = 0; i < length_1; i++) 
+            {
+                let str = searchArr[i];
+                let arr = str.split("=");
+                if (arr[0] == key) 
+                {
+                    return arr[1];
+                }
+            }
+        }
+        return "";
+    }
+
+    //游戏启动方式
+    if(window['ExternalInterface'] && window['ExternalInterface']['call'])
+    {
+        updateLoginBarInfo("start Game By WeiDuan ...");
+        //微端启动方式
+        window['ExternalInterface']['call']("startGameByWeiDuan","");
+    }else
+    {
+        //网页启动方式
+        let msg={"isTest":getUrlOption("isTest"),"ResourceVersion":getUrlOption("gifvar"),"AppVersion":getUrlOption("h5json")};
+        window.start_kdl_h5_game(JSON.stringify(msg));
+    }
 </script>
 </body>
 

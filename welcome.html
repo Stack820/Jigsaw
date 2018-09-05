@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html class="demo-3">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>死神靈魂絕跡</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<style>
+		#preloading {
+		    z-index: 1000;
+            position: absolute;
+            background-image: url("loadding/preloading.gif");
+            background-repeat: no-repeat;
+            width: 128px;
+            height: 200px;
+            margin-left:-64px;
+            left:50%;
+            transform:translateX(-50%);
+            top:50%;
+            transform:translateY(-50%);
+            /*z-index: 1000;
+            position: absolute;
+            text-align: center;
+            top: 20%;
+            left: 35%;
+            width: 20%;
+            height: 20%;*/
+        }
+    </style>
+</head>
+
+<body>
+	<div id="preloading"></div>
+	<div style="position:absolute;display: flex;width: 100%;height: 100%">
+<div style="margin: auto;padding-bottom: 100px">
+<div class="logo"></div>
+<section class="ball">
+	<ul class="bokeh">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</section>
+</div>
+</div>
+<div style="position:absolute;bottom:0px;color:white;width:100%;text-align:center">
+<div id='info' class="info"></div>
+<div style="position:relative">
+<div class="bar barHeight barBack"></div>
+<div id='bar' class="bar barHeight barFront"></div>
+</div>
+</div>
+<script>
+	var setProgressScript = function () {
+		window.egretMiniAppLoadingProgress = function (msg, val) {
+			var bar = document.getElementById('bar');
+			bar.style.width = val + "%";
+			var infoMsg = 'StartEngine [' + val + '%] ';
+			switch (msg) {
+				case "requestingRuntime"://请求 runtime 信息
+					infoMsg += "Requesting Runtime";
+					break;
+				case "loadingRuntime"://下载 runtime
+					infoMsg += "Loading Runtime";
+					break;
+				case "loadingGame":
+					infoMsg += "LoadingGame";
+					break;
+				case "gameStarted":
+					infoMsg += "GameStarted";
+					break;
+				case "loadRuntimeFailed":
+					infoMsg += "LoadRuntime Failed";
+					break;
+
+			}
+			document.getElementById('info').innerHTML = infoMsg;
+		}
+		document.getElementById('info').innerHTML = '如果是第一次安裝遊戲可能需要較長的時間…';
+		var bar1 = document.getElementById('bar');
+		bar1.style.width = "1%";
+	}
+	setProgressScript();
+</script>
+</body>
+
+</html>
