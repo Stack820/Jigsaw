@@ -138,6 +138,7 @@ module fairui {
 			}
 			catch (e) {
 				// App.log.error("FairyUIManager.openPanel Error." + panelId, e);
+				console.log("FairyUIManager.openPanel Error." + panelId);
 			}
 		}
 

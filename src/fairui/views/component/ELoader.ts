@@ -136,6 +136,10 @@ module fairui {
             return this.img.grayed;
         }
 
+        public set enabled(val:boolean) {
+            this.img.enabled = val;
+        }
+
         public set alpha(value: number) {
             this.img.alpha = value; 
         }

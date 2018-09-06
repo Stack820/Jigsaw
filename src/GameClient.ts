@@ -7,6 +7,7 @@ import PlayerAttributeEvent = com.events.PlayerAttributeEvent;
 import HeroEvent = com.events.HeroEvent;
 import FairyUIManager = fairui.FairyUIManager;
 import EnumPanelID = com.enums.EnumPanelID;
+import JigsawCenter = com.center.JigsawCenter;
 
 class GameClient extends base.GSprite {
 
@@ -24,8 +25,8 @@ class GameClient extends base.GSprite {
 		App.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchBeginHandler, this);
 		App.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchMoveHandler, this);
 		App.stage.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEndHandler, this);
-
-        FairyUIManager.openPanel(EnumPanelID.MAIN_MENU)
+		JigsawCenter.Instance.init();
+        FairyUIManager.openPanel(EnumPanelID.JIGSAW);
 	}
 
 	public changeScene(type: number, displayObject: base.GSprite) {

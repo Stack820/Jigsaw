@@ -18,7 +18,7 @@ module fairui {
 			// }
 			PanelRegister.dmap = new flash.Dictionary();
 			//主界面注册
-			PanelRegister.register(EnumPanelID.MAIN_MENU, new PanelInfo(EnumPanelID.MAIN_MENU, EnumPanel.TYPE_MAIUI, "main", "", fairui.MenuPanel, false, true));
+			PanelRegister.register(EnumPanelID.JIGSAW, new PanelInfo(EnumPanelID.JIGSAW, EnumPanel.TYPE_WINDOW1, "main", "", JigsawPanel));
 		}
 		/**
 		 * 注册面板

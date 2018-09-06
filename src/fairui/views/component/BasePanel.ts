@@ -272,12 +272,12 @@ module fairui {
 
         public get width(): number {
 
-            return this.bg ? this.bg.width : 1136;
+            return this.bg ? this.bg.width : 1920;
         }
 
         public get height(): number {
 
-            return this.bg ? this.bg.height : 640;
+            return this.bg ? this.bg.height : 1080;
         }
 
         /**

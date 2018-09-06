@@ -464,6 +464,7 @@ module fairui {
 		public set touchEnabled(value: boolean) {
 
 			this.list._rootContainer.touchEnabled = value;
+			this.list.touchable = value;
 		}
 
 		public get touchEnabled(): boolean {

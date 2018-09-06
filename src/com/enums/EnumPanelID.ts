@@ -182,8 +182,9 @@ module com {
             /**新英雄解鎖面板*/
             public static NEW_HERO:number = 89;
 			/**番队排行榜规则*/
-			public static VILLAGE_RANK_DEMISE: number = 90;	
-
+			public static VILLAGE_RANK_DEMISE: number = 90;
+			/**拼图*/
+			public static JIGSAW:number = 91;
 		}
 	}
 }
