@@ -4,11 +4,17 @@ module com.center {
             this.name = name;
         }
         public name:string;
+        private _displayName:string;
         public fragArr:Array<Jigsaw_frag>;
+
+        public get displayName():string {
+            return this._displayName;
+        }
         /**
          * 初始化一张图的所有碎片坐标
          * */
         public init(picInfo:any):void {
+            this._displayName = picInfo.displayname;
             this.fragArr = new Array<Jigsaw_frag>();
             for (let i:number = 0; i < 16; i++) {
                 let frag:Jigsaw_frag = new Jigsaw_frag(picInfo.coordinates[i][0], picInfo.coordinates[i][1]);

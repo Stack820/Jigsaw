@@ -6,6 +6,10 @@ module fairui {
     import TouchEvent = egret.TouchEvent;
     import GList = fairygui.GList;
     import GGraph = fairygui.GGraph;
+    import Timer = egret.Timer;
+    import TimerEvent = egret.TimerEvent;
+    import getTimer = egret.getTimer;
+    import GImage = fairygui.GImage;
 
     export class JigsawPanel extends BasePanel {
 
@@ -20,11 +24,16 @@ module fairui {
         private graph_frag_2:GGraph;
         private graph_frag_3:GGraph;
         private graph_scene:GGraph;
+        private img_right:GImage;
+        private img_wrong:GImage;
+
 
         private eloaderArr:Array<ELoader>;
 
         //game logics
         private currFragArr:Array<Jigsaw_frag>;
+        /**当前拼图的idx*/
+        private currPicIdx:number = 0;
         /**当前第一个碎片的idx*/
         private currFragIdx:number = 0;
         /**当前选中碎片在列表中的idx*/
@@ -34,6 +43,13 @@ module fairui {
         /**当前选中的frag*/
         private currSelFrag:Jigsaw_frag;
         private currSelIdx:number;
+
+        /**游玩计时器*/
+        private timer:Timer;
+        /**游戏启动后的参与次数*/
+        private joinedTimes:number = -1;
+        /**拼完后计时*/
+        private gameOverTimer:Timer;
 
         public constructor() {
             super("main", "JigsawPanel");
@@ -61,6 +77,9 @@ module fairui {
             this.eglist_pics.clickHandler = this.clickPic;
             this.addPanelEventListener(EGListEvent.RENDER, this.listRender_frag, this.eglist_frag, this);
             this.eglist_frag.touchEnabled = false;
+
+            this.timer = new Timer(1000);
+            this.addPanelEventListener(TimerEvent.TIMER, this.onTimer, this.timer, this);
         }
 
         public show(data: any): void {
@@ -77,12 +96,31 @@ module fairui {
             super.dispose();
         }
 
+        /**游玩计时*/
+        private onTimer() {
+            let secs:number = this.timer.currentCount
+            let sec:number = secs % 60;
+            let hour:number = Math.round(secs / 3600);
+            let min:number = Math.round((secs % 3600) / 60);
+            this.txt_timeCount.text = hour + ":" + min + ":" + sec;
+        }
+
         private gameRestart(idx:number): void {
+            this.currPicIdx = idx;
+            if (this.gameOverTimer) {
+                this.gameOverTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, this.gameOverTimerComp, this);
+                this.gameOverTimer.stop();
+            }
             this.resetEloaders();
+            this.txt_title.text = JigsawCenter.Instance.getList()[idx].displayName;
             this.currFragArr = JigsawCenter.Instance.getStartFragArr(idx);
             this.eglist_frag.array = this.currFragArr;
             this.currFragIdx = 0;
             this.clickUpOrDown();
+            this.timer.reset();
+            this.timer.start();
+            this.joinedTimes++;
+            this.txt_joinTimes.text = this.joinedTimes.toString();
         }
 
         private resetEloaders(): void {
@@ -119,6 +157,7 @@ module fairui {
                             this.currSelFragIdx = this.currFragIdx;
                             this.currSelIdx = parseInt(this.currFragArr[this.currSelFragIdx].name.split("_")[1]);
                             this.currSelEl = this.eloaderArr[this.currSelIdx];
+                            this.currSelEl.img.sortingOrder = 0;
                             this.currSelFrag = this.currFragArr[this.currSelFragIdx];
                             this.currSelEl.url = JigsawCenter.RES_PATH + this.currSelFrag.name + ".png";
                             this.currSelEl.x = e.stageX - this.currSelEl.width / 2;
@@ -131,6 +170,7 @@ module fairui {
                             this.currSelFragIdx = this.currFragIdx + 1;
                             this.currSelIdx = parseInt(this.currFragArr[this.currSelFragIdx].name.split("_")[1]);
                             this.currSelEl = this.eloaderArr[this.currSelIdx];
+                            this.currSelEl.img.sortingOrder = 0;
                             this.currSelFrag = this.currFragArr[this.currSelFragIdx];
                             this.currSelEl.url = JigsawCenter.RES_PATH + this.currSelFrag.name + ".png";
                             this.currSelEl.x = e.stageX - this.currSelEl.width / 2;
@@ -143,6 +183,7 @@ module fairui {
                             this.currSelFragIdx = this.currFragIdx + 2;
                             this.currSelIdx = parseInt(this.currFragArr[this.currSelFragIdx].name.split("_")[1]);
                             this.currSelEl = this.eloaderArr[this.currSelIdx];
+                            this.currSelEl.img.sortingOrder = 0;
                             this.currSelFrag = this.currFragArr[this.currSelFragIdx];
                             this.currSelEl.url = JigsawCenter.RES_PATH + this.currSelFrag.name + ".png";
                             this.currSelEl.x = e.stageX - this.currSelEl.width / 2;
@@ -152,17 +193,26 @@ module fairui {
                         break;
                 }
             } else if (e.type == TouchEvent.TOUCH_END) {
-                if (this.currSelFrag.judge(e.stageX, e.stageY)) {
-                    this.currFragArr.splice(this.currSelFragIdx, 1);
-                    this.eglist_frag.array = this.currFragArr;
-                    this.currFragIdx = 0;
-                    this.currSelEl.x = this.currSelFrag.x;
-                    this.currSelEl.y = this.currSelFrag.y;
-                    this.clickUpOrDown();
-                } else {
-                    this.currSelEl.visible = false;
+                if (this.currSelEl) {
+                    if (this.currSelFrag.judge(e.stageX, e.stageY)) {
+                        this.currFragArr.splice(this.currSelFragIdx, 1);
+                        this.eglist_frag.array = this.currFragArr;
+                        this.currFragIdx = 0;
+                        this.currSelEl.x = this.currSelFrag.x;
+                        this.currSelEl.y = this.currSelFrag.y;
+                        this.clickUpOrDown();
+                        //TODO 播放正确效果
+                        this.showRightOrWrong(1);
+                        if (this.currFragArr.length == 0) {
+                            this.gameOver();
+                        }
+                    } else {
+                        //TODO 播放错误效果
+                        this.showRightOrWrong(0);
+                        this.currSelEl.visible = false;
+                    }
+                    this.currSelEl = null;
                 }
-                this.currSelEl = null;
             }
             switch (e.target) {
 
@@ -185,7 +235,28 @@ module fairui {
             }
         }
 
+        private gameOver(): void {
+            this.gameOverTimer = new Timer(1000, 2);
+            this.gameOverTimer.addEventListener(TimerEvent.TIMER_COMPLETE, this.gameOverTimerComp, this);
+            this.gameOverTimer.start();
+        }
+
+        private gameOverTimerComp() {
+            this.gameOverTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, this.gameOverTimerComp, this);
+            this.gameRestart(this.currPicIdx);
+        }
+
         private onMove(e:TouchEvent): void {
+        }
+
+        private showRightOrWrong(type:number): void {
+            if (type == 1) {
+                TweenLite.to(this.img_right, 0.5, {alpha:1});
+                TweenLite.to(this.img_right, 0.5, {alpha:0,delay:0.7});
+            } else {
+                TweenLite.to(this.img_wrong, 0.5, {alpha:1});
+                TweenLite.to(this.img_wrong, 0.5, {alpha:0,delay:0.7});
+            }
         }
     }
 }

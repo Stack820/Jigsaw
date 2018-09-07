@@ -43,7 +43,7 @@ module com.center {
 
         public getStartFragArr(idx:number):Array<Jigsaw_frag> {
             let ans:Array<Jigsaw_frag> = new Array<Jigsaw_frag>();
-            let dataArr:Array<Jigsaw_frag> = this._jigsaws[idx].fragArr;
+            let dataArr:Array<Jigsaw_frag> = this._jigsaws[idx].fragArr.concat();
             while (dataArr.length > 0) {
                 let rand:number = MathUnit.randRange(0, dataArr.length - 1);
                 ans.push(dataArr[rand]);
