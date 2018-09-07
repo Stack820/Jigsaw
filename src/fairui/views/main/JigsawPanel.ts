@@ -19,6 +19,7 @@ module fairui {
         private graph_frag_1:GGraph;
         private graph_frag_2:GGraph;
         private graph_frag_3:GGraph;
+        private graph_scene:GGraph;
 
         private eloaderArr:Array<ELoader>;
 
@@ -26,6 +27,8 @@ module fairui {
         private currFragArr:Array<Jigsaw_frag>;
         /**当前第一个碎片的idx*/
         private currFragIdx:number = 0;
+        /**当前选中碎片在列表中的idx*/
+        private currSelFragIdx:number = 0;
         /**当前选中的eloader*/
         private currSelEl:ELoader = null;
         /**当前选中的frag*/
@@ -43,8 +46,9 @@ module fairui {
             this.eloaderArr = new Array<ELoader>(17);
 
             for (let i:number = 1; i <= 16; i++) {
-                this.eloaderArr[i] = new ELoader(<GLoader>this.getChild("eloader_" + i));
+                this.eloaderArr[i] = this["eloader_" + i];
                 this.eloaderArr[i].visible = false;
+                this.addPanelEventListener(TouchEvent.TOUCH_END, flash.bind(this.onClick, this), this.eloaderArr[i].img, this);
             }
             this.addPanelEventListener(TouchEvent.TOUCH_MOVE, flash.bind(this.onClick, this), this, this);
             this.addPanelEventListener(TouchEvent.TOUCH_TAP, flash.bind(this.onClick, this), this.btn_up, this);
@@ -105,42 +109,51 @@ module fairui {
         private onClick(e:TouchEvent): void {
             if (e.type == TouchEvent.TOUCH_MOVE) {
                 if (this.currSelEl) {
-                    this.currSelEl.x = e.localX - this.currSelEl.width;
-                    this.currSelEl.y = e.localY - this.currSelEl.height;
+                    this.currSelEl.x = e.stageX - this.currSelEl.width / 2;
+                    this.currSelEl.y = e.stageY - this.currSelEl.height / 2;
                 }
             } else if (e.type == TouchEvent.TOUCH_BEGIN) {
                 switch (e.target) {
                     case this.graph_frag_1:
                         if (this.currFragArr.length > 0) {
-                            this.currSelIdx = parseInt(this.currFragArr[0].name.split("_")[1]);
+                            this.currSelFragIdx = this.currFragIdx;
+                            this.currSelIdx = parseInt(this.currFragArr[this.currSelFragIdx].name.split("_")[1]);
                             this.currSelEl = this.eloaderArr[this.currSelIdx];
-                            this.currSelFrag = this.currFragArr[0];
+                            this.currSelFrag = this.currFragArr[this.currSelFragIdx];
                             this.currSelEl.url = JigsawCenter.RES_PATH + this.currSelFrag.name + ".png";
+                            this.currSelEl.x = e.stageX - this.currSelEl.width / 2;
+                            this.currSelEl.y = e.stageY - this.currSelEl.height / 2;
                             this.currSelEl.visible = true;
                         }
                         break;
                     case this.graph_frag_2:
                         if (this.currFragArr.length > 1) {
-                            this.currSelIdx = parseInt(this.currFragArr[1].name.split("_")[1]);
+                            this.currSelFragIdx = this.currFragIdx + 1;
+                            this.currSelIdx = parseInt(this.currFragArr[this.currSelFragIdx].name.split("_")[1]);
                             this.currSelEl = this.eloaderArr[this.currSelIdx];
-                            this.currSelFrag = this.currFragArr[1];
+                            this.currSelFrag = this.currFragArr[this.currSelFragIdx];
                             this.currSelEl.url = JigsawCenter.RES_PATH + this.currSelFrag.name + ".png";
+                            this.currSelEl.x = e.stageX - this.currSelEl.width / 2;
+                            this.currSelEl.y = e.stageY - this.currSelEl.height / 2;
                             this.currSelEl.visible = true;
                         }
                         break;
                     case this.graph_frag_3:
                         if (this.currFragArr.length > 2) {
-                            this.currSelIdx = parseInt(this.currFragArr[2].name.split("_")[1]);
+                            this.currSelFragIdx = this.currFragIdx + 2;
+                            this.currSelIdx = parseInt(this.currFragArr[this.currSelFragIdx].name.split("_")[1]);
                             this.currSelEl = this.eloaderArr[this.currSelIdx];
-                            this.currSelFrag = this.currFragArr[2];
+                            this.currSelFrag = this.currFragArr[this.currSelFragIdx];
                             this.currSelEl.url = JigsawCenter.RES_PATH + this.currSelFrag.name + ".png";
+                            this.currSelEl.x = e.stageX - this.currSelEl.width / 2;
+                            this.currSelEl.y = e.stageY - this.currSelEl.height / 2;
                             this.currSelEl.visible = true;
                         }
                         break;
                 }
             } else if (e.type == TouchEvent.TOUCH_END) {
-                if (this.currSelFrag.judge(e.localX, e.localY)) {
-                    this.currFragArr.splice(this.currSelIdx, 1);
+                if (this.currSelFrag.judge(e.stageX, e.stageY)) {
+                    this.currFragArr.splice(this.currSelFragIdx, 1);
                     this.eglist_frag.array = this.currFragArr;
                     this.currFragIdx = 0;
                     this.currSelEl.x = this.currSelFrag.x;
@@ -167,7 +180,9 @@ module fairui {
         private clickUpOrDown():void {
             this.btn_down.enabled = this.currFragIdx + 3 < this.currFragArr.length;
             this.btn_up.enabled = this.currFragIdx > 0 && this.currFragArr.length > 3;
-            this.eglist_frag.scrollToView(this.currFragIdx, true, true);
+            if (this.currFragArr.length > 0) {
+                this.eglist_frag.scrollToView(this.currFragIdx, true, true);
+            }
         }
 
         private onMove(e:TouchEvent): void {
